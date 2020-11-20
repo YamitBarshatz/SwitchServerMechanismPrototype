@@ -22,9 +22,9 @@
 /*
  * Enumerations
  */
-typedef enum mechanism_server_results {
-
-} mechanism_server_results;
+//typedef enum mechanism_server_results {
+//
+//} mechanism_server_results;
 
 /*
  * Structs
