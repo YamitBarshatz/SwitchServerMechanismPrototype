@@ -1,0 +1,9 @@
+Debug/
+tmp/
+hello
+output_file_1
+output_file_2
+*.filters
+*.user
+*.vcxproj
+desktop.ini
