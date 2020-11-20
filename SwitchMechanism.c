@@ -350,18 +350,18 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		char prefix_name[] = "switch_output_file_";
 		strcat(segment_output_file, prefix_name);
 		char id[10];
-		_itoa(run_id, id, 10);
+		sprintf(id, "%d", run_id);
 		strcat(segment_output_file, id);
 		strcat(segment_output_file, "_");
 		char index[10];
-		_itoa(i, index, 10);
+		sprintf(index, "%d", i);
 		strcat(segment_output_file, index);
 		char num_of_seg[10];
-		_itoa(num_of_segments, num_of_seg, 10);
+		sprintf(num_of_seg, "%d", num_of_segments);
 		strcat(segment_output_file, "_");
 		strcat(segment_output_file, num_of_seg);
 		char len_of_seg[10];
-		_itoa(segment_lenght, len_of_seg, 10);
+		sprintf(len_of_seg, "%d", segment_lenght);
 		strcat(segment_output_file, "_");
 		strcat(segment_output_file, len_of_seg);
 		strcat(segment_output_file,".txt");
@@ -400,7 +400,8 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 		switch_insert_next(s, value_to_insert, &output_port, &output_value);
 		if (output_value != INIT_VALUE) {
 			//printf("\n60000");
-			_itoa(output_value, value_str_from_switch, 10);
+			sprintf(value_str_from_switch, "%d", output_value);
+
 			fputs(value_str_from_switch, output_files[output_port]);
 			fputs("\n", output_files[output_port]);
 			//printf("\n60001");
@@ -416,7 +417,7 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 			if (current_val != INIT_VALUE) {
 				//printf("\n60005");
 				//printf("\nport: %d, value: %d", port, current_val);//for_release
-				_itoa(current_val, value_str_from_switch, 10);
+				sprintf(value_str_from_switch, "%d", current_val);
 				fputs(value_str_from_switch, output_files[port]);
 				fputs("\n", output_files[port]);
 				//printf("\n60006");
@@ -428,7 +429,7 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 			if (current_val != INIT_VALUE) {
 				//printf("\n60005");
 				//printf("\nport: %d, value: %d", port, current_val);//for_release
-				_itoa(current_val, value_str_from_switch, 10);
+				sprintf(value_str_from_switch, "%d", current_val);
 				fputs(value_str_from_switch, output_files[port]);
 				fputs("\n", output_files[port]);
 				//printf("\n60006");
