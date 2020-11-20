@@ -512,14 +512,14 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 	char prefix_name[] = "merged_output_file_";
 	strcat(merged_file_output_name, prefix_name);
 	char id[10];
-	_itoa(run_id, id, 10);
+	sprintf(id, "%d", run_id);
 	strcat(merged_file_output_name, id);
 	strcat(merged_file_output_name, "_");
 	char num_of_seg[10];
-	_itoa(num_of_segments, num_of_seg, 10);
+	sprintf(num_of_seg, "%d", num_of_segments);
 	strcat(merged_file_output_name, num_of_seg);
 	char len_of_seg[10];
-	_itoa(segment_lenght, len_of_seg, 10);
+	sprintf(len_of_seg, "%d", segment_lenght);
 	strcat(merged_file_output_name, "_");
 	strcat(merged_file_output_name, len_of_seg);
 	strcat(merged_file_output_name, ".txt");
@@ -533,18 +533,19 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		strcat(segment_input_file, prefix_name);
 
 		char id[10];
-		_itoa(run_id, id, 10);
+		sprintf(id, "%d", run_id);
+
 		strcat(segment_input_file, id);
 		strcat(segment_input_file, "_");
 		char index[10];
-		_itoa(port, index, 10);
+		sprintf(index, "%d", port);
 		strcat(segment_input_file, index);
 		char num_of_seg[10];
-		_itoa(num_of_segments, num_of_seg, 10);
+		sprintf(num_of_seg, "%d", num_of_segments);
 		strcat(segment_input_file, "_");
 		strcat(segment_input_file, num_of_seg);
 		char len_of_seg[10];
-		_itoa(segment_lenght, len_of_seg, 10);
+		sprintf(len_of_seg, "%d", segment_lenght);
 		strcat(segment_input_file, "_");
 		strcat(segment_input_file, len_of_seg);
 		strcat(segment_input_file, ".txt");
@@ -599,7 +600,8 @@ mechanism_results convert_array_to_output_file(int* output_array, int size_of_ou
 	int i;
 	char temp[10];
 	for (i = 0; i < size_of_output_array; i++) {
-		_itoa(output_array[i], temp, 10);
+		sprintf(temp, "%d", output_array[i]);
+
 		fputs(temp, output_file);
 		fputs("\n", output_file);
 	}
