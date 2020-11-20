@@ -16,9 +16,9 @@
 /*
  * Enumerations
  */
-typedef enum mechanism_switch_results {
+//typedef enum mechanism_switch_results {
 
-} mechanism_switch_results;
+//} mechanism_switch_results;
 
 /*
  * Structs
@@ -137,6 +137,6 @@ mechanism_results release_segment_data(struct switch_segment_node* segment);
 mechanism_results release_switch(struct switch_mechanism* s);
 
 
-mechanism_results mehcanism_apply_switch_flow(int num_of_segments,
-    int segment_lenght,FILE* input_file, char* segment_prefix_name, int maximum_value);
+mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
+    int segment_lenght, FILE* input_file, char* segment_prefix_name, int maximum_value);
 /* End of Switch API */

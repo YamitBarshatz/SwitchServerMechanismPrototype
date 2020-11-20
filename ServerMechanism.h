@@ -81,3 +81,6 @@ int pop_next_value(int* data_array, int* indexes, int* index_aux_array, int k);
 
 mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
     int segment_lenght, int k, char* input_files_directory, char* segment_prefix_name);
+
+mechanism_results mechanism_server_insert_data_from_files(server_mechanism* server, int port, FILE* fp);
+mechanism_results convert_array_to_output_file(output_array, size_of_output_array, output_file);
