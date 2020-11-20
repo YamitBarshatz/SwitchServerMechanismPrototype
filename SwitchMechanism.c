@@ -389,7 +389,7 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 		return MECHANISM_ALLOC_FAILED;
 	}
 //	printf("\n5");
-	switch_mechanism_set_ranges_default(s, maximum_value);
+	switch_mechanism_set_ranges_default(s);
 	int output_port;
 	int output_value;
 	char value_str_from_file[10];
