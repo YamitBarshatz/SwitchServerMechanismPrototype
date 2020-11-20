@@ -14,7 +14,7 @@ switch_mechanism* switch_mechanism_init(
 	int max_value)
 {
 	switch_mechanism* switch_handler = NULL;
-	int i = 0;
+	int i = 0; mehcanism_apply_switch_flow
 
 	if (num_of_segments <= 0 || segment_length <= 0 || max_value <= 0) {
 		return NULL;

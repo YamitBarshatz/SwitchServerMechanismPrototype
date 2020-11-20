@@ -140,3 +140,6 @@ mechanism_results release_switch(struct switch_mechanism* s);
 mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
     int segment_lenght, FILE* input_file, char* segment_prefix_name, int maximum_value);
 /* End of Switch API */
+
+mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
+    FILE* input_file, FILE** output_files, int maximum_value);
