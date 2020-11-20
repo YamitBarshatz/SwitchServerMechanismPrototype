@@ -5,7 +5,7 @@
 #include <string.h>
 #include "TypesMechanism.h"
 
-char* itoa(int val, int base)
+char* _itoa(int val, int base)
 {
 	static char buf[32] = { 0 };
 	int i = 30;
