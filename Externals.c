@@ -5,18 +5,6 @@
 #include <string.h>
 #include "TypesMechanism.h"
 
-char* _itoa(int val, int base)
-{
-	static char buf[32] = { 0 };
-	int i = 30;
-
-	for (; val && i; --i, val /= base) {
-		buf[i] = "0123456789abcdef"[val % base];
-	}
-
-	return &buf[i + 1];
-
-}
 
 int create_random_input(char* path)
 {
@@ -33,7 +21,7 @@ int create_random_input(char* path)
 		if (curr_val > max_val) {
 			max_val = curr_val;
 		}
-		_itoa(curr_val, curr_val_str, 10);
+		sprintf(curr_val_str, "%d", curr_val);
 		fputs(curr_val_str, fp);
 		fputs("\n", fp);
 	}
