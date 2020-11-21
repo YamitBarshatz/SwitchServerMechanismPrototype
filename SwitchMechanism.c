@@ -311,11 +311,11 @@ mechanism_results release_switch(struct switch_mechanism* s)
 		int i;
 		for (i = 0; i < s->num_of_segments; i++) {
 			//printf("\n90000000");
-
-			result = release_segment_data(&(s->segments[i]));
-			if (result != MECHANISM_SUCCESS) {
-				return result;
-			}
+			free(s->segments[i].data_flow);
+			//result = release_segment_data(&(s->segments[i]));
+			//if (result != MECHANISM_SUCCESS) {
+			//	return result;
+			//}
 		}
 		//printf("\n80000000");
 		free(s->segments);

@@ -103,7 +103,8 @@ int main(int argc, char* argv[])
        if (res != MECHANISM_SUCCESS) {
            return -1;
        }
-    }  fclose(input_file);
+    }
+    fclose(input_file);
     if (strcmp(argv[1], "server") == 0) {
       //  printf("hellooooo\n");
         if (argc < 8) {
