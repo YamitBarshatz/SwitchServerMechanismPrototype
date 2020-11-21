@@ -347,6 +347,7 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 	char* segment_output_file = (char *)malloc(sizeof(char)*(strlen(segment_prefix_name) + 60));
 	for (i = 0; i < num_of_segments; i++) {
 		strcpy(segment_output_file, segment_prefix_name);
+		printf("\n\n%s\n\n", segment_output_file);
 		char prefix_name[] = "switch_output_file_";
 		strcat(segment_output_file, prefix_name);
 		char id[10];
