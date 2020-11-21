@@ -374,6 +374,9 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 //	printf("\n3");
 	res = mechanism_switch_flow(num_of_segments, segment_lenght, input_file, segments_files, maximum_value);
 //	printf("\n8");
+	for (i = 0; i < num_of_segments; i++) {
+		fclose(segments_files[i]);
+	}
 	return res;
 }
 
