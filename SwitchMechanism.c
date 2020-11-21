@@ -307,7 +307,7 @@ mechanism_results release_switch(struct switch_mechanism* s)
 		return MECHANISM_NULL_POINTER;
 	}
 
-	if (s->segments) {
+	//if (s->segments) {
 		int i;
 		for (i = 0; i < s->num_of_segments; i++) {
 			//printf("\n90000000");
@@ -319,7 +319,7 @@ mechanism_results release_switch(struct switch_mechanism* s)
 		}
 		//printf("\n80000000");
 		free(s->segments);
-	}
+	//}
 
 	free(s);
 
