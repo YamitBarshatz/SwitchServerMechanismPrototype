@@ -303,9 +303,9 @@ mechanism_results release_segment_data(struct switch_segment_node* segment)
 mechanism_results release_switch(struct switch_mechanism* s)
 {
 	enum mechanism_results result;
-	if (!s) {
-		return MECHANISM_NULL_POINTER;
-	}
+	//if (!s) {
+	//	return MECHANISM_NULL_POINTER;
+	//}
 
 	//if (s->segments) {
 		int i;
