@@ -93,6 +93,7 @@ int main(int argc, char* argv[])
         if (argc == 8) {
             maximum_value = atoi(argv[7]);
             if (maximum_value < 1) {
+                fclose(input_file);
                 printf("Error: The sixth parameter is illegal.\n Maximum value should be an integer greater than zero");
                 return -1;
             }
