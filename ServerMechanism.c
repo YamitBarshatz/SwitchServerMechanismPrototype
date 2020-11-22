@@ -485,13 +485,13 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 	if (!input_files_directory) {
 		return MECHANISM_NULL_POINTER;
 	}
-
+	printf("\n21\n\n");
 	int port;
 	server_mechanism* server = server_mechanism_init(num_of_segments);
 	if (!server) {
 		return MECHANISM_ALLOC_FAILED;
 	}
-
+	printf("\n22\n\n");
 	FILE* fp = NULL;
 	FILE* output_file = NULL;
 
@@ -525,7 +525,7 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 	strcat(merged_file_output_name, ".txt");
 //	printf("\n\n%s\n\n", merged_file_output_name); //for_release
 	output_file = fopen(merged_file_output_name, "w+");
-
+	printf("\n23\n\n");
 	for (port = 0; port < num_of_segments; port++) {
 		strcpy(segment_input_file, input_files_directory);
 
@@ -555,10 +555,12 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		mechanism_server_insert_data_from_files(server, port, fp);
 		fclose(fp);
 	}
-	
+	printf("\n24\n\n");
 	merge_sort(server, &output_array, k, &size_of_output_array);
+	printf("\n25\n\n");
 //	printf("\nmerge sort pass\n"); //for_release
 	convert_array_to_output_file(output_array, size_of_output_array, output_file);
+	printf("\n26\n\n");
 	fclose(output_file);
 
 	printf("\nfree output array\n\n");
