@@ -467,7 +467,7 @@ mechanism_results merge_sort(server_mechanism* server, int* output_array, int k,
 		iter += server->ports[i].last_inserted_value_index + 1;
 
 	}
-	printf("\n\n2\n");
+	//printf("\n\n2\n");
 
 	end = clock();
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
@@ -563,21 +563,22 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		//	printf("size: %d\n", size_of_output_array);
 		//	printf("server->ports[%d].last_inserted_value_index: %d\n",i, server->ports[i].last_inserted_value_index);
 	}
-	printf("\n\n11\n");
+	//printf("\n\n11\n");
 
 	output_array = (int*)malloc(sizeof(int) * size_of_output_array);
 
 	merge_sort(server, output_array, k, &size_of_output_array);
-//	printf("\nmerge sort pass\n"); //for_release
-	printf("\n\n21\n");
+//	//printf("\nmerge sort pass\n"); //for_release
+	//printf("\n\n21\n");
 
 	convert_array_to_output_file(output_array, size_of_output_array, output_file);
 	fclose(output_file);
-	printf("\n\n31\n");
-
-	printf("\nfree output array\n\n");
-	free(output_array);
-	printf("\n\n41\n");
+	//printf("\n\n31\n");
+	if (output_array) {
+		printf("\nfree output array\n\n");
+		free(output_array);
+	}
+	//printf("\n\n41\n");
 
 	free(segment_input_file);
 	free(merged_file_output_name);
