@@ -55,7 +55,7 @@ mechanism_results check_if_sorted(char* path, int size)
 	if (flag) {
 		printf("Sorted!\n\n");
 	}
-
+	free(temp_array);
 	fclose(fp);
 	return MECHANISM_SUCCESS;
 }
