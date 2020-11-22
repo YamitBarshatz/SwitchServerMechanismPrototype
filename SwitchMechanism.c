@@ -338,7 +338,7 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 
 	int i;
 	mechanism_results res;
-	FILE** segments_files = (FILE**)malloc(num_of_segments * sizeof(FILE*));
+	FILE* segments_files[400] = { 0 };// (FILE**)malloc(num_of_segments * sizeof(FILE*));
 	if (!segments_files) {
 		return MECHANISM_ALLOC_FAILED;
 	}
@@ -370,9 +370,8 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		strcat(segment_output_file, len_of_seg);
 		strcat(segment_output_file,".txt");
 		segments_files[i] = fopen(segment_output_file, "w+");
-		if (!segment_output_file) {
+		if (!segments_files[i]) {
 			//free(segment_output_file);
-			free(segments_files);
 			return MECHANISM_ALLOC_FAILED;
 		}
 		
