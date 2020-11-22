@@ -385,7 +385,7 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 	for (i = 0; i < num_of_segments; i++) {
 		fclose(segments_files[i]);
 	}
-	free(segments_files);
+	//free(segments_files);
 	return res;
 }
 
