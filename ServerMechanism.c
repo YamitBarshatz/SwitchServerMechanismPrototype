@@ -88,11 +88,11 @@ mechanism_results server_insert(
 	int num_of_runs = server_side->ports[port].num_of_runs;
 	
 	if (last_inserted_value_index == current_size_of_segment - 1) {
-		printf("\n\nhhhhh\n");
 		int* resized_segment_array =
 			(int*)realloc(server_side->ports[port].segment_data,
 				current_size_of_segment * 2 * sizeof(int));
 		if (!resized_segment_array) {
+			printf("\n\n44444\n");
 			free(server_side->ports[port].segment_data);
 			return MECHANISM_ALLOC_FAILED;
 		}
@@ -118,7 +118,6 @@ mechanism_results server_insert(
 	else if (server_side->ports[port].segment_data[last_inserted_value_index - 1] >
 		server_side->ports[port].segment_data[last_inserted_value_index]) {
 		if (num_of_runs == current_size_of_indexes_array) {
-			printf("\n\njjjjj\n");
 
 			int* resized_indexes_array =
 				(int*)realloc(server_side->ports[port].indexes, current_size_of_indexes_array * 2 * sizeof(int));
