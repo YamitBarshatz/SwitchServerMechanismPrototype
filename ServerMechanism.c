@@ -562,6 +562,7 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 	fclose(output_file);
 
 	if (output_array) {
+		printf("\nfree output array\n\n");
 		free(output_array);
 	}
 
