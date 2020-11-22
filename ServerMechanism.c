@@ -98,6 +98,7 @@ mechanism_results server_insert(
 		}
 
 		server_side->ports[port].segment_data = resized_segment_array;
+		resized_segment_array = NULL;
 
 		memset(server_side->ports[port].segment_data + current_size_of_segment,
 			INIT_VALUE, current_size_of_segment * sizeof(int));
@@ -128,6 +129,7 @@ mechanism_results server_insert(
 			}
 			
 			server_side->ports[port].indexes = resized_indexes_array;
+			resized_indexes_array = NULL;
 
 			memset(server_side->ports[port].indexes + current_size_of_indexes_array,
 				0, current_size_of_indexes_array * sizeof(int));
