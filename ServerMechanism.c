@@ -553,9 +553,9 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		fclose(fp);
 	}
 	
-	if (!(output_array)) {
-		return MECHANISM_ALLOC_FAILED;
-	}
+	//if (!(output_array)) {
+	//	return MECHANISM_ALLOC_FAILED;
+	//}
 	int i = 0;
 	for (i = 0; i < server->num_of_ports; i++) {
 		//	printf("size: %d\n", size_of_output_array);
