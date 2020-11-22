@@ -344,6 +344,10 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 	}
 
 	char* segment_output_file = (char *)malloc(sizeof(char)*(strlen(segment_prefix_name) + 60));
+	if (!segment_output_file) {
+		free(segments_files);
+		return MECHANISM_ALLOC_FAILED;
+	}
 	for (i = 0; i < num_of_segments; i++) {
 		strcpy(segment_output_file, segment_prefix_name);
 		printf("\n\n%s\n\n", segment_output_file);
@@ -366,6 +370,12 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		strcat(segment_output_file, len_of_seg);
 		strcat(segment_output_file,".txt");
 		segments_files[i] = fopen(segment_output_file, "w+");
+		if (!segment_output_file) {
+			free(segment_output_file);
+			free(segments_files);
+			return MECHANISM_ALLOC_FAILED;
+		}
+		
 	}
 	for (i = 0; i < strlen(segment_prefix_name) + 60; i++) {
 		segment_output_file[i] = '2';
