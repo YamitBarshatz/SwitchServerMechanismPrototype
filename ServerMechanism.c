@@ -561,10 +561,8 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 	convert_array_to_output_file(output_array, size_of_output_array, output_file);
 	fclose(output_file);
 
-	if (output_array) {
-		printf("\nfree output array\n\n");
-		free(output_array);
-	}
+	printf("\nfree output array\n\n");
+	free(output_array);
 
 	free(segment_input_file);
 	free(merged_file_output_name);
