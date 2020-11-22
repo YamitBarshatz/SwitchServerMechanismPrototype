@@ -33,7 +33,7 @@ int create_random_input(char* path)
 mechanism_results check_if_sorted(char* path, int size)
 {
 	FILE* fp = fopen(path, "r");
-	int* temp_array = (int)malloc(size * sizeof(int));
+	int* temp_array = (int*)malloc(size * sizeof(int));
 	char str_num[10];
 	int i, flag = 1;
 	for (i = 0; i < size; i++) {
