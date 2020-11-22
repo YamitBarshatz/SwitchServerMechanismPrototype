@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
             printf("Error: The first parameter is illegal.\n Run ID should be an integer greater than zero");
             return -1;
         }
-
+        printf("\n\n100\n");
         num_of_segments = atoi(argv[3]);
         if (num_of_segments < 1) {
             printf("Error: The second parameter is illegal.\n Number of segments should be an integer greater than zero");
@@ -148,8 +148,13 @@ int main(int argc, char* argv[])
             printf("Error: The fourth parameter is illegal.\n The lenght of segments should be an integer greater than zero");
             return -1;
         }
+        printf("\n\n200\n");
+
         mechanism_results res = mechanism_apply_server_flow(run_id, num_of_segments, segment_length, k,
            input_files_directory, output_prefix_name);
+        printf("\n\n300\n");
+
+    
     }
 
     if (strcmp(argv[1], "validate") == 0) {
