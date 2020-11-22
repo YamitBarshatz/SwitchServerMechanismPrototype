@@ -343,7 +343,7 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		return MECHANISM_ALLOC_FAILED;
 	}
 
-	char* segment_output_file[660] = 0;// = (char*)malloc(sizeof(char) * (strlen(segment_prefix_name) + 60));
+	char segment_output_file[660] = { 0 };// = (char*)malloc(sizeof(char) * (strlen(segment_prefix_name) + 60));
 	//if (!segment_output_file) {
 	//	free(segments_files);
 	//	return MECHANISM_ALLOC_FAILED;
