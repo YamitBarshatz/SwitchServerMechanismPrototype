@@ -118,6 +118,8 @@ mechanism_results server_insert(
 			int* resized_indexes_array =
 				(int*)realloc(server_side->ports[port].indexes, current_size_of_indexes_array * 2 * sizeof(int));
 			if (!resized_indexes_array) {
+				free(server_side->ports[port].indexes);
+				printf("\n\n333333\n");
 				return MECHANISM_ALLOC_FAILED;
 			}
 
@@ -446,7 +448,7 @@ mechanism_results merge_sort(server_mechanism* server, int* output_array, int k,
 
 	//*size = size_of_output_array;
 	//int* temp_array = (int*)malloc(sizeof(int) * size_of_output_array);
-	printf("\n\n1\n");
+	//printf("\n\n1\n");
 	//*output_array = temp_array;
 	int j;
 	int iter = 0;
