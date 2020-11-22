@@ -566,7 +566,7 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 
 	output_array = (int*)malloc(sizeof(int) * size_of_output_array);
 
-	merge_sort(server, &output_array, k, &size_of_output_array);
+	merge_sort(server, output_array, k, &size_of_output_array);
 //	printf("\nmerge sort pass\n"); //for_release
 	convert_array_to_output_file(output_array, size_of_output_array, output_file);
 	fclose(output_file);

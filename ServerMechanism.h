@@ -75,7 +75,7 @@ mechanism_results merge_k(server_port_node* port_to_merge,
 mechanism_results merge_iteration(server_port_node* port_to_merge, int port_num, int k);
 mechanism_results merge_sort_port(server_port_node* port_to_merge, int port_num, int k);
 //merge_sort (with memcpy)
-mechanism_results merge_sort(server_mechanism* server, int** output_array, int k, int* size);
+mechanism_results merge_sort(server_mechanism* server, int* output_array, int k, int* size);
 //static functions
 int pop_next_value(int* data_array, int* indexes, int* index_aux_array, int k);
 
