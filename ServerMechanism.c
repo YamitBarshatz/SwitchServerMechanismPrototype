@@ -419,7 +419,7 @@ mechanism_results merge_sort_port(server_port_node* port_to_merge, int port_num,
 	return res;
 }
 
-mechanism_results merge_sort(server_mechanism* server, int** output_array, int k,
+mechanism_results merge_sort(server_mechanism* server, int* output_array, int k,
 	int* size)
 {
 	clock_t start, end;
@@ -437,20 +437,17 @@ mechanism_results merge_sort(server_mechanism* server, int** output_array, int k
 
 	int i, size_of_output_array = 0;
 
-	for (i = 0; i < server->num_of_ports; i++) {
-	//	printf("size: %d\n", size_of_output_array);
-		size_of_output_array += server->ports[i].last_inserted_value_index + 1;
-	//	printf("size: %d\n", size_of_output_array);
-	//	printf("server->ports[%d].last_inserted_value_index: %d\n",i, server->ports[i].last_inserted_value_index);
-	} //for_release
+	//for (i = 0; i < server->num_of_ports; i++) {
+	////	printf("size: %d\n", size_of_output_array);
+	//	size_of_output_array += server->ports[i].last_inserted_value_index + 1;
+	////	printf("size: %d\n", size_of_output_array);
+	////	printf("server->ports[%d].last_inserted_value_index: %d\n",i, server->ports[i].last_inserted_value_index);
+	//} //for_release
 
 	*size = size_of_output_array;
-	int* temp_array = (int*)malloc(sizeof(int) * size_of_output_array);
-	if (!(*temp_array)) {
-		return MECHANISM_ALLOC_FAILED;
-	}
+	//int* temp_array = (int*)malloc(sizeof(int) * size_of_output_array);
 
-	*output_array = temp_array;
+	//*output_array = temp_array;
 	int j;
 	int iter = 0;
 	mechanism_results res;
@@ -458,11 +455,11 @@ mechanism_results merge_sort(server_mechanism* server, int** output_array, int k
 		flag = 0;
 		res = merge_sort_port(&(server->ports[i]), i, k);
 		if (res != MECHANISM_SUCCESS) {
-			free((*output_array));
+			free((output_array));
 			return res;
 		}
 	//	printf("\n Merge_sort:\n"); //for_release
-		memcpy((*output_array) + iter, server->ports[i].segment_data,
+		memcpy((output_array) + iter, server->ports[i].segment_data,
 			(server->ports[i].last_inserted_value_index + 1) * sizeof(int));
 
 		for (j = 0; j <= server->ports[i].last_inserted_value_index; j++) {
@@ -506,7 +503,7 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		return MECHANISM_ALLOC_FAILED;
 	}
 	int* output_array = NULL;
-	int size_of_output_array;
+	int size_of_output_array = 0;
 
 	strcpy(merged_file_output_name, output_prefix_name);
 	char prefix_name[] = "merged_output_file_";
@@ -556,15 +553,28 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		fclose(fp);
 	}
 	
+	if (!(output_array)) {
+		return MECHANISM_ALLOC_FAILED;
+	}
+	int i = 0;
+	for (i = 0; i < server->num_of_ports; i++) {
+		//	printf("size: %d\n", size_of_output_array);
+		size_of_output_array += server->ports[i].last_inserted_value_index + 1;
+		//	printf("size: %d\n", size_of_output_array);
+		//	printf("server->ports[%d].last_inserted_value_index: %d\n",i, server->ports[i].last_inserted_value_index);
+	}
+
+	output_array = (int*)malloc(sizeof(int) * size_of_output_array);
+
 	merge_sort(server, &output_array, k, &size_of_output_array);
 //	printf("\nmerge sort pass\n"); //for_release
 	convert_array_to_output_file(output_array, size_of_output_array, output_file);
 	fclose(output_file);
 
-	//if (output_array) {
+	if (output_array) {
 		printf("\nfree output array\n\n");
 		free(output_array);
-	//}
+	}
 
 	free(segment_input_file);
 	free(merged_file_output_name);
