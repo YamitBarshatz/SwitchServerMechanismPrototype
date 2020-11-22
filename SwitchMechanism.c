@@ -338,7 +338,6 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 
 	int i;
 	mechanism_results res;
-//	printf("\n1");
 	FILE** segments_files = (FILE**)malloc(num_of_segments * sizeof(FILE*));
 	if (!segments_files) {
 		return MECHANISM_ALLOC_FAILED;
@@ -368,13 +367,12 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		strcat(segment_output_file,".txt");
 		segments_files[i] = fopen(segment_output_file, "w+");
 	}
-
-//	printf("\n%s\n", segment_output_file);
+	for (i = 0; i < strlen(segment_prefix_name) + 60; i++) {
+		segment_output_file[i] = '2';
+	}
 
 	free(segment_output_file);
-//	printf("\n3");
 	res = mechanism_switch_flow(num_of_segments, segment_lenght, input_file, segments_files, maximum_value);
-//	printf("\n8");
 	for (i = 0; i < num_of_segments; i++) {
 		fclose(segments_files[i]);
 	}
@@ -385,7 +383,6 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 	FILE* input_file, FILE** output_files, int maximum_value)
 {
-//	printf("\n4");
 	struct switch_mechanism* s;
 	mechanism_results result;
 	s = switch_mechanism_init(num_of_segments, segment_lenght, maximum_value);
@@ -393,7 +390,7 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 		printf("\nSwitch was not allocated.\n");//for_release
 		return MECHANISM_ALLOC_FAILED;
 	}
-//	printf("\n5");
+
 	switch_mechanism_set_ranges_default(s);
 	int output_port;
 	int output_value;
@@ -404,7 +401,6 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 		value_to_insert = atoi(value_str_from_file);
 		switch_insert_next(s, value_to_insert, &output_port, &output_value);
 		if (output_value != INIT_VALUE) {
-			//printf("\n60000");
 			sprintf(value_str_from_switch, "%d", output_value);
 
 			fputs(value_str_from_switch, output_files[output_port]);
