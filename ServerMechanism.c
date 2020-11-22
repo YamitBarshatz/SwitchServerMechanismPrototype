@@ -88,6 +88,7 @@ mechanism_results server_insert(
 	int num_of_runs = server_side->ports[port].num_of_runs;
 	
 	if (last_inserted_value_index == current_size_of_segment - 1) {
+		printf("\n\nhhhhh\n");
 		int* resized_segment_array =
 			(int*)realloc(server_side->ports[port].segment_data,
 				current_size_of_segment * 2 * sizeof(int));
@@ -96,10 +97,11 @@ mechanism_results server_insert(
 			return MECHANISM_ALLOC_FAILED;
 		}
 
-		memset(resized_segment_array + current_size_of_segment,
+		server_side->ports[port].segment_data = resized_segment_array;
+
+		memset(server_side->ports[port].segment_data + current_size_of_segment,
 			INIT_VALUE, current_size_of_segment * sizeof(int));
 //		printf("\n Segment data array in port %d resized from %d to %d", port, current_size_of_segment, current_size_of_segment * 2); //for_release
-		server_side->ports[port].segment_data = resized_segment_array;
 		server_side->ports[port].current_size_of_segment *= 2;
 	}
 //	printf("\nlast_inserted_value_index 1: %d\n", last_inserted_value_index);
@@ -115,6 +117,8 @@ mechanism_results server_insert(
 	else if (server_side->ports[port].segment_data[last_inserted_value_index - 1] >
 		server_side->ports[port].segment_data[last_inserted_value_index]) {
 		if (num_of_runs == current_size_of_indexes_array) {
+			printf("\n\njjjjj\n");
+
 			int* resized_indexes_array =
 				(int*)realloc(server_side->ports[port].indexes, current_size_of_indexes_array * 2 * sizeof(int));
 			if (!resized_indexes_array) {
@@ -122,11 +126,12 @@ mechanism_results server_insert(
 				printf("\n\n333333\n");
 				return MECHANISM_ALLOC_FAILED;
 			}
+			
+			server_side->ports[port].indexes = resized_indexes_array;
 
-			memset(resized_indexes_array + current_size_of_indexes_array,
+			memset(server_side->ports[port].indexes + current_size_of_indexes_array,
 				0, current_size_of_indexes_array * sizeof(int));
 //			printf("\n Indexes array in port %d resized from %d to %d", port, current_size_of_indexes_array, current_size_of_indexes_array * 2); //for_release
-			server_side->ports[port].indexes = resized_indexes_array;
 			server_side->ports[port].current_size_of_indexes_array *= 2;
 //			printf("\n New size of indexes array is: %d\n", server_side->ports[port].current_size_of_indexes_array);
 		}
