@@ -161,12 +161,8 @@ mechanism_results release_server(struct server_mechanism* server)
 
 	int port;
 	for (port = 0; port < server->num_of_ports; port++) {
-		if (server->ports[port].indexes) {
-			free(server->ports[port].indexes);
-		}
-		if (server->ports[port].segment_data) {
-			free(server->ports[port].segment_data);
-		}
+		free(server->ports[port].indexes);
+		free(server->ports[port].segment_data);
 	}
 	free(server->ports);
 	free(server);
