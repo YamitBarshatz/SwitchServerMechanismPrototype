@@ -253,7 +253,7 @@ int switch_insert_next(
 	}
 	//printf("\nInserting value %d.\n", input);//for_release
 	result = switch_find_next_segment_and_index(s, input, &port, &index);
-	printf("\nport to insert to: %d.\n", port);
+	//printf("\nport to insert to: %d.\n", port);
 	//printf("\nport is: %d, index is: %d", port, index);//for_release
 	if (result != MECHANISM_SUCCESS && result != MECHANISM_SEGMENT_OUT_OF_INDEXES) {
 		return result;
@@ -410,7 +410,7 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 	while (fgets(value_str_from_file, 10, input_file) != NULL) {
 		value_to_insert = atoi(value_str_from_file);
 		switch_insert_next(s, value_to_insert, &output_port, &output_value);
-		printf("\noutput port: %d.\n", output_port);
+		//printf("\noutput port: %d.\n", output_port);
 		if (output_value != INIT_VALUE) {
 			sprintf(value_str_from_switch, "%d", output_value);
 
