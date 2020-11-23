@@ -90,7 +90,10 @@ mechanism_results server_insert(
 	if (last_inserted_value_index == current_size_of_segment - 1) {
 		int* resized_segment_array =
 			(int*)realloc(server_side->ports[port].segment_data,
-				(current_size_of_segment+1) * 2 * sizeof(int));
+				current_size_of_segment * 2 * sizeof(int));
+		if (server_side->ports[port].segment_data) {
+			printf("\n\nfff1111111ffff\n");
+		}
 		if (!resized_segment_array) {
 			printf("\n\n44444\n");
 			free(server_side->ports[port].segment_data);
@@ -120,7 +123,10 @@ mechanism_results server_insert(
 		if (num_of_runs == current_size_of_indexes_array) {
 
 			int* resized_indexes_array =
-				(int*)realloc(server_side->ports[port].indexes, (current_size_of_indexes_array+1) * 2 * sizeof(int));
+				(int*)realloc(server_side->ports[port].indexes, current_size_of_indexes_array * 2 * sizeof(int));
+			if (server_side->ports[port].indexes) {
+				printf("\n\nfffffff\n");
+			}
 			if (!resized_indexes_array) {
 				free(server_side->ports[port].indexes);
 				printf("\n\n333333\n");
