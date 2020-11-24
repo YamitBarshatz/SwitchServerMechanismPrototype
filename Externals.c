@@ -44,9 +44,7 @@ mechanism_results check_if_sorted(char* path, int size)
 	for (i = 0; i < size; i++) {
 		fgets(str_num, 10, fp);
 		
-		temp_array[i] = atoi(str_num);
-		printf("\n\n%d\n\n", temp_array[i]);
-		
+		temp_array[i] = atoi(str_num);		
 	}
 	printf("\nafter reading\n");
 /*	for (i = 0; i < size - 1; i++) {
