@@ -108,7 +108,6 @@ int main(int argc, char* argv[])
      
     }
     if (strcmp(argv[1], "server") == 0) {
-      //  printf("hellooooo\n");
         if (argc < 8) {
             printf("Error: Too few arguments");
             return -1;
@@ -130,7 +129,6 @@ int main(int argc, char* argv[])
             printf("Error: The first parameter is illegal.\n Run ID should be an integer greater than zero");
             return -1;
         }
-        printf("\n\n100\n");
         num_of_segments = atoi(argv[3]);
         if (num_of_segments < 1) {
             printf("Error: The second parameter is illegal.\n Number of segments should be an integer greater than zero");
@@ -148,12 +146,9 @@ int main(int argc, char* argv[])
             printf("Error: The fourth parameter is illegal.\n The lenght of segments should be an integer greater than zero");
             return -1;
         }
-        printf("\n\n200\n");
 
         mechanism_results res = mechanism_apply_server_flow(run_id, num_of_segments, segment_length, k,
            input_files_directory, output_prefix_name);
-        printf("\n\n300\n");
-
     
     }
 
@@ -169,7 +164,7 @@ int main(int argc, char* argv[])
         }
 
         char* file_to_check_path = argv[2];
-        int size_of_file = argv[3];
+        int size_of_file = atoi(argv[3]);
         check_if_sorted(file_to_check_path, size_of_file);
     }
     //printf("success new version\n");//for_release

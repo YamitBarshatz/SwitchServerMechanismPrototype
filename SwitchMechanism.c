@@ -188,52 +188,39 @@ int switch_insert_value_to_segment(
 
 	if (s->segments[segment].first_size_values_cnt <= 0) {
 		*output = s->segments[segment].data_flow[s->segments[segment].partition_index];
-		//printf("\n2\n");
 		for (int idx = 0; idx < s->segments[segment].partition_index; idx++) {
-			//printf("\n4\n");
 			if (value < s->segments[segment].data_flow[idx]) {
-				//printf("\n5\n");
 				for (i = idx; i <= s->segments[segment].partition_index; i++) {
-					//printf("\n6\n");
 					tmp_val = s->segments[segment].data_flow[i];
 					s->segments[segment].data_flow[i] = current;
 					current = tmp_val;
-					//printf("\n7\n");
 				}
-				//printf("\n8\n");
 				s->segments[segment].partition_index = (s->segments[segment].partition_index + 1) % (s->segments[segment].size);
 
 				//printf("\ncurrent start new row 207: %d", s->segments[segment].current_start);
 				return MECHANISM_SUCCESS;
 			}
 		}
-			//printf("\n9\n");
 			s->segments[segment].data_flow[s->segments[segment].partition_index] = value;
 			s->segments[segment].partition_index = (s->segments[segment].partition_index + 1) % (s->segments[segment].size);
-			//printf("\n10\n");
 			return MECHANISM_SUCCESS;
 	}
 	else {
 		//int init_state = 0;
-		//printf("\n21\n");
 		for (i = index; i < (s->segments[segment].size); i++) {
-			//printf("\n22\n");
 			tmp_val = s->segments[segment].data_flow[i];
 		//	if (tmp_val == INIT_VALUE) {
 		//		init_state = 1;
 		//B	}
 			s->segments[segment].data_flow[i] = current;
 			current = tmp_val;
-			//printf("\n23\n");
 		//	printf("\nseg: %d, size_values_cnt %d\n", segment, s->segments[segment].first_size_values_cnt);//for_release
 
 		}
 
 		s->segments[segment].first_size_values_cnt--;
 		*output = INIT_VALUE;
-		//printf("\n25\n");
 	}
-	//printf("\n26\n");
 	return MECHANISM_SUCCESS;
 }
 
@@ -263,8 +250,6 @@ int switch_insert_next(
 	if (result != MECHANISM_SUCCESS) {
 		return result;
 	}
-	//printf("\n100\n");
-//	printf("\nBBBBBBBBBBBB\n");
 	for (int i = 0; i < s->num_of_segments; i++) {
 	//	printf("segment number: %d\n", i);
 		//printf("current start: %d\n", s->segments[i].current_start);
@@ -277,7 +262,6 @@ int switch_insert_next(
 	}
 	*output_port = port;
 	*output_value = val;
-	//printf("\n1010\n");
 
 	//printf("\nOutput value %d dedicated for port %d\n", val, port);//for_release
 	return MECHANISM_SUCCESS;
@@ -288,14 +272,9 @@ mechanism_results release_segment_data(struct switch_segment_node* segment)
 	if (!segment) {
 		return MECHANISM_NULL_POINTER;
 	}
-	//printf("\n100000000");
 
 	if (segment->data_flow) {
-		//printf("\n100000001000000");
-
 		free(segment->data_flow);
-		//printf("\n222000002000000");
-
 	}
 
 	return MECHANISM_SUCCESS;
@@ -311,14 +290,12 @@ mechanism_results release_switch(struct switch_mechanism* s)
 	//if (s->segments) {
 		int i;
 		for (i = 0; i < s->num_of_segments; i++) {
-			//printf("\n90000000");
 			free(s->segments[i].data_flow);
 			//result = release_segment_data(&(s->segments[i]));
 			//if (result != MECHANISM_SUCCESS) {
 			//	return result;
 			//}
 		}
-		//printf("\n80000000");
 		free(s->segments);
 	//}
 
@@ -339,19 +316,19 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 
 	int i;
 	mechanism_results res;
-	FILE* segments_files[400] = { 0 };// (FILE**)malloc(num_of_segments * sizeof(FILE*));
+	FILE** segments_files = (FILE**)malloc(num_of_segments * sizeof(FILE*));
 	if (!segments_files) {
 		return MECHANISM_ALLOC_FAILED;
 	}
 
-	char segment_output_file[660] = { 0 };// = (char*)malloc(sizeof(char) * (strlen(segment_prefix_name) + 60));
-	//if (!segment_output_file) {
-	//	free(segments_files);
-	//	return MECHANISM_ALLOC_FAILED;
-	//}
+	char* segment_output_file = (char*)malloc(sizeof(char) * (strlen(segment_prefix_name) + 60));
+	if (!segment_output_file) {
+		free(segments_files);
+		return MECHANISM_ALLOC_FAILED;
+	}
 	for (i = 0; i < num_of_segments; i++) {
 		strcpy(segment_output_file, segment_prefix_name);
-		printf("\n\n%s\n\n", segment_output_file);
+	//	printf("\n\n%s\n\n", segment_output_file);
 		char prefix_name[] = "switch_output_file_";
 		strcat(segment_output_file, prefix_name);
 		char id[10];
@@ -371,22 +348,22 @@ mechanism_results mehcanism_apply_switch_flow(int run_id, int num_of_segments,
 		strcat(segment_output_file, len_of_seg);
 		strcat(segment_output_file,".txt");
 		segments_files[i] = fopen(segment_output_file, "w+");
-		if (!segments_files[i]) {
-			//free(segment_output_file);
-			return MECHANISM_ALLOC_FAILED;
-		}
+		//if (!segments_files[i]) {
+		//	//free(segment_output_file);
+		//	return MECHANISM_ALLOC_FAILED;
+		//}
 		
 	}
-	for (i = 0; i < strlen(segment_prefix_name) + 60; i++) {
-		segment_output_file[i] = '2';
-	}
+	//for (i = 0; i < strlen(segment_prefix_name) + 60; i++) {
+	//	segment_output_file[i] = '2';
+	//}
 
-	//free(segment_output_file);
+	free(segment_output_file);
 	res = mechanism_switch_flow(num_of_segments, segment_lenght, input_file, segments_files, maximum_value);
 	for (i = 0; i < num_of_segments; i++) {
 		fclose(segments_files[i]);
 	}
-	//free(segments_files);
+	free(segments_files);
 	return res;
 }
 
@@ -416,42 +393,30 @@ mechanism_results mechanism_switch_flow(int num_of_segments, int segment_lenght,
 
 			fputs(value_str_from_switch, output_files[output_port]);
 			fputs("\n", output_files[output_port]);
-			//printf("\n60001");
 		}
 	}
-	//printf("\n60002");
 	int port, i, current_val;
 	for (port = 0; port < s->num_of_segments; port++) {
-		//printf("\n60003");
 		for (i = s->segments[port].partition_index; i < s->segments[port].size; i++) {
-			//printf("\n60004");
 			current_val = s->segments[port].data_flow[i];
 			if (current_val != INIT_VALUE) {
-				//printf("\n60005");
 				//printf("\nport: %d, value: %d", port, current_val);//for_release
 				sprintf(value_str_from_switch, "%d", current_val);
 				fputs(value_str_from_switch, output_files[port]);
 				fputs("\n", output_files[port]);
-				//printf("\n60006");
 			}
 		}
 		for (i = 0; i < s->segments[port].partition_index; i++) {
-			//printf("\n60004");
 			current_val = s->segments[port].data_flow[i];
 			if (current_val != INIT_VALUE) {
-				//printf("\n60005");
 				//printf("\nport: %d, value: %d", port, current_val);//for_release
 				sprintf(value_str_from_switch, "%d", current_val);
 				fputs(value_str_from_switch, output_files[port]);
 				fputs("\n", output_files[port]);
-				//printf("\n60006");
 			}
 		}
 	}
-//	printf("\n7");
-	//printf("\n60007");
 	release_switch(s);
-	//printf("\n60008");
 	return MECHANISM_SUCCESS;
 }
 

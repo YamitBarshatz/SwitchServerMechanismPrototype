@@ -33,20 +33,17 @@ int create_random_input(char* path)
 mechanism_results check_if_sorted(char* path, int size)
 {
 	FILE* fp = fopen(path, "r");
-	printf("\n\n%s\n\n", path);
 	if (!fp) {
 		printf("\nnWARNING ERROR!!!!\n\n");
 	}
-	printf("\nafter file\n");
 	int* temp_array = (int*)malloc(size * sizeof(int));
 	char str_num[10];
 	int i, flag = 1;
 	for (i = 0; i < size; i++) {
 		fgets(str_num, 10, fp);
 		
-		temp_array[i] = atoi(str_num);		
+		temp_array[i] = atoi(str_num);	
 	}
-	printf("\nafter reading\n");
 /*	for (i = 0; i < size - 1; i++) {
 		printf("%d\n", temp_array[i]);
 	}*/
