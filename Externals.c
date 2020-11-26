@@ -16,7 +16,7 @@ int create_random_input(char* path)
 	int max_val = 0;
 	char curr_val_str[10];
 
-	for (int i = 0; i < 10000000; i++) {
+	for (int i = 0; i < 100000000; i++) {
 		curr_val = rand();
 		if (curr_val > max_val) {
 			max_val = curr_val;

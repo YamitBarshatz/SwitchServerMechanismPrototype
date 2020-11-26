@@ -348,7 +348,7 @@ test_results test_mechanism_apply_server_flow()
 
 test_results test_create_random_input()
 {
-	create_random_input("C:\\Users\\yamit\\Desktop\\Project_Mechanism_files\\Switch_files\\test_file\\random_test_file.txt");
+	create_random_input("C:\\Users\\yamit\\Desktop\\Project_Mechanism_files\\Switch_files\\test_file\\random_test_file100M.txt");
 	return TEST_SUCCESS;
 }
 
@@ -366,7 +366,7 @@ test_results checking_time()
 	double cpu_time_used;
 
 	start = clock();
-	for (int i = 0; i < 1000000000; i++);
+	for (int i = 0; i < 20000000; i++);
 	end = clock();
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
@@ -403,7 +403,7 @@ test_results checking_time()
 	//	assert(test_check_if_sorted() == TEST_SUCCESS);
 	//assert(checking_time() == TEST_SUCCESS);
 	//End of mechanism test
-	//return 0;
+//	return 0;
 //}
 
 
