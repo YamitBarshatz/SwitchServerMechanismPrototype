@@ -551,7 +551,7 @@ mechanism_results mechanism_apply_server_flow(int run_id, int num_of_segments,
 		strcat(segment_input_file, len_of_seg);
 		strcat(segment_input_file, ".txt");
 		fp = fopen(segment_input_file, "r");
-		printf("\n%s\n", segment_input_file);
+//		printf("\n%s\n", segment_input_file);
 //		printf("port iss: %d", port);
 		mechanism_server_insert_data_from_files(server, port, fp);
 		fclose(fp);
